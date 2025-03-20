@@ -8,6 +8,9 @@ import { motion } from "framer-motion";
 import { initializeApp } from "firebase/app";
 import { getFirestore, collection, getDocs, doc, updateDoc, arrayUnion } from "firebase/firestore";
 import 'ldrs/bouncy';
+import { bouncy } from 'ldrs';
+
+
 
 // Firebase configuration
 const firebaseConfig = {
@@ -83,10 +86,12 @@ export default function RateImage() {
   if (loading) {
     return (
       <div className="flex justify-center items-center h-screen">
-        <l-bouncy size="80" speed="1.75" color="black"></l-bouncy>
+        <div className="w-16 h-16 border-4 border-gray-300 border-t-black rounded-full animate-spin"></div>
       </div>
     );
   }
+  
+  
 
   if (!imageData) {
     return <p className="text-center mt-10 text-red-500">Failed to load image</p>;
