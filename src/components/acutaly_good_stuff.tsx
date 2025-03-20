@@ -107,13 +107,12 @@ export default function RateImage() {
         >
           Rate this {imageData.type} (0-10)
         </motion.h2>
-        <motion.img 
-          src={imageData.url} 
-          alt={imageData.type} 
-          className="w-full h-96 object-cover rounded-lg shadow-md"
-          initial={{ opacity: 0 }} 
-          animate={{ opacity: 1 }}
+                <motion.img 
+        src={imageData.url} 
+        alt={imageData.type} 
+        className="w-full h-96 object-contain rounded-lg shadow-md"
         />
+
         <Input 
           type="number" 
           value={rating} 
