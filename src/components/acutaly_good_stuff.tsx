@@ -33,20 +33,25 @@ export default function RateImage() {
     try {
       const ratingsCollection = collection(db, "Ratings");
       const snapshot = await getDocs(ratingsCollection);
-      const records = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-
+      
+      const records = snapshot.docs.map(doc => {
+        const data = doc.data() as { Url: string; Type: string }; // Explicitly type the document data
+        return { id: doc.id, url: data.Url, type: data.Type };
+      });
+  
       if (records.length === 0) {
         throw new Error("No records found");
       }
-
+  
       const randomRecord = records[Math.floor(Math.random() * records.length)];
-      setImageData({ url: randomRecord.Url, type: randomRecord.Type, id: randomRecord.id });
+      setImageData(randomRecord);
     } catch (error) {
       console.error("Error fetching image:", error);
     } finally {
       setLoading(false);
     }
   };
+  
 
   useEffect(() => {
     fetchImage();
